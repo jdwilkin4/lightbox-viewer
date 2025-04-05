@@ -4,6 +4,10 @@ This is a project I created that was inspired by [freeCodeCamp's LightBox Viewer
 
 [Deployed Project](https://jdwilkin4.github.io/lightbox-viewer/)
 
+## Asset attribution
+
+Photos by EFFYDESK on Unsplash
+
 ## Languages
 
 - HTML
