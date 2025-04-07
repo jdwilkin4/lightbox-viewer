@@ -20,6 +20,8 @@
 }
 
 main {
+  width: 90%;
+  margin: auto;
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -362,7 +364,6 @@ header {
 
 .thumbnail-img-container {
   display: flex;
-  justify-content: space-evenly;
   gap: 10px;
   width: 80%;
 }
@@ -374,6 +375,12 @@ header {
 
   .featured-img {
     max-width: 600px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .thumbnail-img-container {
+    margin: auto;
   }
 }
 
