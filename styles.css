@@ -10,6 +10,7 @@
   --black: #000;
   --transparent-black: #000000ce;
   --dark-green: #073f07;
+  --red: #a40d0d;
   --white: #fff;
   --light-grey: #efefef;
   --grey: #ebe9e9;
@@ -91,30 +92,155 @@ header {
 
 .hamburger-btn {
   position: absolute;
-  top: 15px;
+  top: 20px;
   right: 15%;
   background: none;
   border: none;
 }
 
-.hamburger-menu {
-  display: none;
+.hamburger-menu,
+.cart-container {
   position: fixed;
   top: 0;
-  left: 0;
   width: 100%;
   height: 100vh;
   background-color: var(--transparent-black);
 }
 
+.cart-container {
+  z-index: 1;
+}
+
+.hamburger-menu {
+  left: 0;
+  display: none;
+}
+
+.mobile-nav,
+.cart-sidepanel {
+  background-color: var(--white);
+}
+
+.cart-sidepanel {
+  width: 80%;
+  height: 100vh;
+  padding: 10px;
+  position: absolute;
+  right: 0;
+}
+
+@media (min-width: 768px) {
+  .cart-sidepanel {
+    width: 500px;
+  }
+}
+
+.cart-sidepanel h2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.total-items-in-cart {
+  display: none;
+  font-size: 0.9rem;
+  padding: 5px 10px;
+  border-radius: 50%;
+  background-color: var(--black);
+  color: var(--light-grey);
+}
+
+.cart-sidepanel hr {
+  margin: 10px 0;
+}
+
+.sidepanel-msg {
+  font-size: 1.2rem;
+}
+
+.msg-and-continue-shopping-btn-container {
+  display: none; /*just temporary for testing purposes*/
+  width: 80%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.item-price-container .item-name,
+.current-item-total {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.trash-can-btn {
+  border: none;
+  background: none;
+  margin-top: 5px;
+}
+
+.trash-can-icon {
+  fill: var(--red);
+}
+
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 15px 0;
+}
+
+.bottom-container {
+  width: 100%;
+  padding: 20px;
+  position: absolute;
+  bottom: 50px;
+}
+
+.subtotal-shipping-container p:first-of-type {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.continue-shopping-btn,
+.checkout-btn {
+  margin-top: 15px;
+  font-size: 1.1rem;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+}
+
+.continue-shopping-btn {
+  background-color: var(--black);
+  color: var(--light-grey);
+}
+
+.continue-shopping-btn:hover {
+  filter: opacity(0.8);
+}
+
+.checkout-btn {
+  background-color: var(--light-grey);
+}
+
+.checkout-btn:hover {
+  background-color: var(--grey);
+}
+
+.fill-cart-btn {
+  display: block;
+  width: 100%;
+}
+
 .mobile-nav {
   width: 50%;
-  background-color: var(--white);
   position: relative;
   transition: ease 0.5s;
 }
 
-.mobile-nav button {
+.close-btn {
   position: absolute;
   top: 0;
   right: 0;
@@ -145,7 +271,7 @@ header {
 
 .shopping-cart-icon {
   position: absolute;
-  top: 15px;
+  top: 25px;
   right: 25px;
 }
 
