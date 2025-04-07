@@ -49,9 +49,60 @@ hr {
   border: var(--light-grey-border);
 }
 
-/* TODO: add lightbox styles */
 .lightbox {
   display: none;
+  z-index: 1;
+}
+
+.lightbox img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 80%;
+  width: 90%;
+}
+
+@media (min-width: 768px) {
+  .lightbox img {
+    width: 40%;
+  }
+}
+
+.lightbox-btn {
+  border: none;
+  border-radius: 50%;
+  color: var(--white);
+  font-size: 1.7rem;
+  position: absolute;
+}
+
+.lightbox .close-btn,
+.arrow {
+  border: none;
+  background-color: var(--black);
+  padding: 5px 10px;
+}
+
+.lightbox .close-btn {
+  font-size: 1.4rem;
+  top: 10px;
+  right: 10px;
+}
+
+.arrow {
+  top: 50%;
+  z-index: 1;
+  transform: translate(-50%, -50%);
+}
+
+.left-arrow {
+  width: 50px;
+  left: 40px;
+}
+
+.right-arrow {
+  right: 0;
 }
 
 header {
@@ -99,7 +150,8 @@ header {
 }
 
 .hamburger-menu,
-.cart-container {
+.cart-container,
+.lightbox {
   position: fixed;
   top: 0;
   width: 100%;
@@ -108,6 +160,7 @@ header {
 }
 
 .cart-container {
+  display: none;
   z-index: 1;
 }
 
@@ -160,12 +213,15 @@ header {
 }
 
 .msg-and-continue-shopping-btn-container {
-  display: none; /*just temporary for testing purposes*/
   width: 80%;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.filled-cart-container {
+  display: none;
 }
 
 .item-price-container .item-name,
