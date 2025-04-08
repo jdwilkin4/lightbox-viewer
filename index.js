@@ -106,3 +106,19 @@ closeCartBtn.addEventListener("click", closeCartPanel);
 continueShoppingBtns.forEach((btn) =>
   btn.addEventListener("click", closeCartPanel)
 );
+
+function resetCart() {
+  currTotal = 0;
+  hasAddedItemsToCart = false;
+  currQuantity = 1;
+  itemsInCartText.style.display = "none";
+  cartContainer.style.display = "none";
+  emptyCartContainer.style.display = "block";
+  fillCartContainer.style.display = "none";
+  for (const span of currQuantitySpans) {
+    span.textContent = currQuantity;
+  }
+}
+
+const trashCanBtn = document.querySelector(".trash-can-btn");
+trashCanBtn.addEventListener("click", resetCart);
