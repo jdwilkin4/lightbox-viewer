@@ -150,3 +150,69 @@ function switchToTab(tab) {
 const tabs = document.querySelectorAll("button[role='tab']");
 const tabPanels = document.querySelectorAll("div[role='tabpanel']");
 tabs.forEach((tab) => tab.addEventListener("click", () => switchToTab(tab)));
+
+// lightbox functionality
+
+const allImages = [...document.querySelectorAll(".thumbnail")].concat([
+  ...document.querySelectorAll(".featured-img"),
+]);
+
+const lightboxEl = document.querySelector(".lightbox");
+const featuredImgEls = document.querySelectorAll(".featured-img");
+const thumbnails = document.querySelectorAll(".thumbnail");
+
+function showLightBoxImg(currImg) {
+  featuredImgEls.forEach((img) =>
+    img.setAttribute("src", currImg.getAttribute("src"))
+  );
+
+  const selectedThumbnail = [...thumbnails].find(
+    (el) => el.getAttribute("src") === currImg.getAttribute("src")
+  );
+  const prevSelectedThumbnail = [...thumbnails].find((el) =>
+    el.classList.contains("highlighted")
+  );
+
+  if (!selectedThumbnail.classList.contains("highlighted")) {
+    selectedThumbnail.classList.add("highlighted");
+    prevSelectedThumbnail.classList.remove("highlighted");
+  }
+}
+
+allImages.forEach((img) =>
+  img.addEventListener("click", () => {
+    lightboxEl.style.display = "block";
+    showLightBoxImg(img);
+  })
+);
+
+function closeLightBox() {
+  lightboxEl.style.display = "none";
+}
+
+const lightboxCloseBtn = document.getElementById("lightbox-close-btn");
+lightboxCloseBtn.addEventListener("click", closeLightBox);
+
+function goToNextImg() {
+  let currIndex = [...thumbnails].findIndex((thumbnail) =>
+    thumbnail.classList.contains("highlighted")
+  );
+
+  const nextImgEl = [...thumbnails][currIndex === 2 ? 0 : currIndex + 1];
+  showLightBoxImg(nextImgEl);
+}
+
+const lightBoxNextImgBtn = document.querySelector(".right-arrow");
+lightBoxNextImgBtn.addEventListener("click", goToNextImg);
+
+function goToPrevImg() {
+  let currIndex = [...thumbnails].findIndex((thumbnail) =>
+    thumbnail.classList.contains("highlighted")
+  );
+
+  const prevImgEl = [...thumbnails][currIndex === 0 ? 2 : currIndex - 1];
+  showLightBoxImg(prevImgEl);
+}
+
+const lightBoxPrevImgBtn = document.querySelector(".left-arrow");
+lightBoxPrevImgBtn.addEventListener("click", goToPrevImg);

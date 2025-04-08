@@ -8,24 +8,17 @@
   </head>
   <body>
     <div class="lightbox">
-      <button class="close-btn lightbox-btn">&times;</button>
+      <button id="lightbox-close-btn" class="close-btn lightbox-btn">
+        &times;
+      </button>
       <button class="left-arrow arrow lightbox-btn">&#8678;</button>
       <button class="right-arrow arrow lightbox-btn">&#8680;</button>
-      <picture>
-        <source
-          srcset="./assets/chair-tablet-thumbnail.jpg"
-          media="(min-width: 768px)"
-        />
-        <source
-          srcset="./assets/chair-desktop-thumbnail.jpg"
-          media="(min-width: 1200px)"
-        />
-        <img
-          class="current-img"
-          src="./assets/chair-mobile-thumbnail.jpg"
-          alt="Ergonomic office chair with a simple design, displayed on a white background."
-        />
-      </picture>
+
+      <img
+        class="featured-img"
+        src="./assets/chair-mobile-thumbnail.jpg"
+        alt="Ergonomic office chair with a simple design, displayed on a white background."
+      />
     </div>
     <header>
       <h1 class="brand-name">Furniture Store</h1>
@@ -171,69 +164,34 @@
     <hr class="divider" />
     <main>
       <div class="featured-images-container">
-        <picture>
-          <source
-            srcset="./assets/chair-tablet-thumbnail.jpg"
-            media="(min-width: 768px)"
-          />
-          <source
-            srcset="./assets/chair-desktop-thumbnail.jpg"
-            media="(min-width: 1200px)"
-          />
+        <img
+          id="office-chair-1"
+          class="featured-img"
+          src="./assets/chair-mobile-thumbnail.jpg"
+          alt="Ergonomic office chair with a simple design, displayed on a white background."
+        />
+
+        <div class="thumbnail-img-container">
           <img
-            class="featured-img"
+            id="office-chair-2"
+            class="thumbnail highlighted"
             src="./assets/chair-mobile-thumbnail.jpg"
             alt="Ergonomic office chair with a simple design, displayed on a white background."
           />
-        </picture>
 
-        <div class="thumbnail-img-container">
-          <picture>
-            <source
-              srcset="./assets/chair-tablet-thumbnail.jpg"
-              media="(min-width: 768px)"
-            />
-            <source
-              srcset="./assets/chair-desktop-thumbnail.jpg"
-              media="(min-width: 1200px)"
-            />
-            <img
-              class="thumbnail highlighted"
-              src="./assets/chair-mobile-thumbnail.jpg"
-              alt="Ergonomic office chair with a simple design, displayed on a white background."
-            />
-          </picture>
+          <img
+            id="office-chair-3"
+            class="thumbnail"
+            src="./assets/chair-mobile-thumbnail-2.jpg"
+            alt="Ergonomic office chair with a simple design, displayed on a white background."
+          />
 
-          <picture>
-            <source
-              srcset="./assets/chair-tablet-thumbnail-2.jpg"
-              media="(min-width: 768px)"
-            />
-            <source
-              srcset="./assets/chair-desktop-thumbnail-2.jpg"
-              media="(min-width: 1200px)"
-            />
-            <img
-              class="thumbnail"
-              src="./assets/chair-mobile-thumbnail-2.jpg"
-              alt="Ergonomic office chair with a simple design, displayed on a white background."
-            />
-          </picture>
-          <picture>
-            <source
-              srcset="./assets/chair-tablet-thumbnail-3.jpg"
-              media="(min-width: 768px)"
-            />
-            <source
-              srcset="./assets/chair-desktop-thumbnail-3.jpg"
-              media="(min-width: 1200px)"
-            />
-            <img
-              class="thumbnail"
-              src="./assets/chair-mobile-thumbnail-3.jpg"
-              alt="Woman sitting in ergonomic office chair with a simple design, displayed on a white background."
-            />
-          </picture>
+          <img
+            id="office-chair-4"
+            class="thumbnail"
+            src="./assets/chair-mobile-thumbnail-3.jpg"
+            alt="Woman sitting in ergonomic office chair with a simple design, displayed on a white background."
+          />
         </div>
       </div>
       <div class="product-info-container">
