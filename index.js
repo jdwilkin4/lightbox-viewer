@@ -132,3 +132,21 @@ function toggleSelectingWishlist() {
 }
 const wishlistBtn = document.querySelector(".wishlist-btn");
 wishlistBtn.addEventListener("click", toggleSelectingWishlist);
+
+// Toggle between tabs functionality
+
+function switchToTab(tab) {
+  // reset all selected to false then select correct one
+  tabs.forEach((tab) => tab.setAttribute("aria-selected", false));
+  tab.setAttribute("aria-selected", true);
+
+  // hide all content first then show correct one
+  tabPanels.forEach((panel) => panel.setAttribute("hidden", "true"));
+  const ariaControlsVal = tab.getAttribute("aria-controls");
+  const panel = [...tabPanels].find((panel) => panel.id === ariaControlsVal);
+  panel.removeAttribute("hidden");
+}
+
+const tabs = document.querySelectorAll("button[role='tab']");
+const tabPanels = document.querySelectorAll("div[role='tabpanel']");
+tabs.forEach((tab) => tab.addEventListener("click", () => switchToTab(tab)));
