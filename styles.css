@@ -526,6 +526,16 @@ button[aria-selected="true"] {
   margin: 15px 0;
 }
 
+@media (min-width: 960px) {
+  .tabs-container {
+    width: 645px;
+  }
+
+  #section-2 {
+    width: 100%;
+  }
+}
+
 .spec-list {
   border: var(--thicker-grey-border);
   border-radius: 5px;
