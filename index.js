@@ -1,4 +1,6 @@
-let currQuantity = 1;
+const quantitySpan = document.getElementById("main-page-quantity-span");
+
+let currQuantity = Number(quantitySpan.textContent);
 let hasAddedItemsToCart = false;
 let currTotal = 0;
 
@@ -10,14 +12,22 @@ function updateTotal() {
   currTotal = currQuantity * 299.99;
 }
 
+function getFormattedTotal() {
+  return `$${currTotal.toFixed(2)}`;
+}
+
 function decrementQuantity() {
   if (currQuantity === 1) return;
 
   currQuantity--;
-  currQuantitySpans.forEach((span) => (span.textContent = currQuantity));
+
+  for (const span of currQuantitySpans) {
+    span.textContent = currQuantity;
+  }
+
   itemsInCartText.textContent = currQuantity;
   updateTotal();
-  currTotalEls.forEach((el) => (el.textContent = `$${currTotal}`));
+  currTotalEls.forEach((el) => (el.textContent = getFormattedTotal()));
 }
 
 const decrementBtns = document.querySelectorAll(".decrement-btn");
@@ -28,10 +38,13 @@ decrementBtns.forEach((btn) =>
 function incrementQuantity() {
   currQuantity++;
 
-  currQuantitySpans.forEach((span) => (span.textContent = currQuantity));
+  for (const span of currQuantitySpans) {
+    span.textContent = currQuantity;
+  }
+
   itemsInCartText.textContent = currQuantity;
   updateTotal();
-  currTotalEls.forEach((el) => (el.textContent = `$${currTotal}`));
+  currTotalEls.forEach((el) => (el.textContent = getFormattedTotal()));
 }
 
 const incrementBtns = document.querySelectorAll(".increment-btn");
@@ -47,6 +60,7 @@ const emptyCartContainer = document.querySelector(
 
 function showCartPanel() {
   cartContainer.style.display = "block";
+  emptyCartContainer.style.display = "none";
 
   if (hasAddedItemsToCart) {
     itemsInCartText.style.display = "inline";
@@ -60,9 +74,19 @@ function showCartPanel() {
 const addToCartBtn = document.querySelector(".add-to-cart-btn");
 
 addToCartBtn.addEventListener("click", () => {
-  hasAddedItemsToCart = true;
-  emptyCartContainer.style.display = "none";
-  currQuantity++;
+  if (!hasAddedItemsToCart) {
+    hasAddedItemsToCart = true;
+  } else {
+    currQuantity += currQuantity;
+  }
+
+  for (const span of currQuantitySpans) {
+    span.textContent = currQuantity;
+  }
+
+  updateTotal();
+  currTotalEls.forEach((el) => (el.textContent = getFormattedTotal()));
+
   showCartPanel();
 });
 
