@@ -1,3 +1,4 @@
+// Cart functionality
 const quantitySpan = document.getElementById("main-page-quantity-span");
 
 let currQuantity = Number(quantitySpan.textContent);
@@ -122,3 +123,12 @@ function resetCart() {
 
 const trashCanBtn = document.querySelector(".trash-can-btn");
 trashCanBtn.addEventListener("click", resetCart);
+
+// Add to wishlist functionality
+function toggleSelectingWishlist() {
+  const heartIcon = document.querySelector(".heart-icon");
+  const currVal = heartIcon.getAttribute("fill");
+  heartIcon.setAttribute("fill", currVal === "none" ? "#a40d0d" : "none");
+}
+const wishlistBtn = document.querySelector(".wishlist-btn");
+wishlistBtn.addEventListener("click", toggleSelectingWishlist);
