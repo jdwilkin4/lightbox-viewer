@@ -216,3 +216,17 @@ function goToPrevImg() {
 
 const lightBoxPrevImgBtn = document.querySelector(".left-arrow");
 lightBoxPrevImgBtn.addEventListener("click", goToPrevImg);
+
+// Dialog functionality
+
+const modal = document.querySelector(".popup-modal");
+const checkoutBtn = document.querySelector(".checkout-btn");
+const closeModalBtn = document.getElementById("close-modal-btn");
+
+checkoutBtn.addEventListener("click", () => {
+  modal.showModal();
+});
+
+closeModalBtn.addEventListener("click", () => {
+  modal.close();
+});

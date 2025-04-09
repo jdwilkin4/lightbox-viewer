@@ -51,6 +51,28 @@ hr {
   border: var(--light-grey-border);
 }
 
+.popup-modal {
+  text-align: center;
+  width: 80%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.popup-modal::backdrop {
+  background-color: var(--transparent-black);
+}
+
+.popup-modal p {
+  font-size: 1.4rem;
+  margin: 20px 0;
+}
+
+#close-modal-btn {
+  margin-bottom: 20px;
+}
+
 .lightbox {
   display: none;
   z-index: 1;
@@ -262,7 +284,8 @@ header {
 }
 
 .continue-shopping-btn,
-.checkout-btn {
+.checkout-btn,
+#close-modal-btn {
   margin-top: 15px;
   font-size: 1.1rem;
   padding: 10px;
@@ -270,12 +293,14 @@ header {
   border-radius: 5px;
 }
 
-.continue-shopping-btn {
+.continue-shopping-btn,
+#close-modal-btn {
   background-color: var(--black);
   color: var(--light-grey);
 }
 
-.continue-shopping-btn:hover {
+.continue-shopping-btn:hover,
+#close-modal-btn:hover {
   filter: opacity(0.8);
 }
 
