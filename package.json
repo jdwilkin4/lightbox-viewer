@@ -1,0 +1,36 @@
+{
+  "name": "lightbox-viewer",
+  "version": "1.0.0",
+  "description": "This is a project I created that was inspired by [freeCodeCamp's LightBox Viewer Lab](https://www.freecodecamp.org/learn/full-stack-developer/lab-lightbox-viewer/build-a-lightbox-viewer).",
+  "scripts": {
+    "dev": "parcel index.html --open",
+    "build": "parcel build index.html",
+    "deploy": "gh-pages -d dist",
+    "test": " npx playwright test",
+    "test:ui": "  npx playwright test --ui"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jdwilkin4/lightbox-viewer.git"
+  },
+  "keywords": [
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "Playwright"
+  ],
+  "author": "Jessica Wilkins",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jdwilkin4/lightbox-viewer/issues"
+  },
+  "homepage": "https://github.com/jdwilkin4/lightbox-viewer#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.51.1",
+    "@types/node": "^22.14.0",
+    "gh-pages": "^6.3.0"
+  },
+  "dependencies": {
+    "parcel": "^2.14.4"
+  }
+}
