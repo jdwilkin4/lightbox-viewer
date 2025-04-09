@@ -113,9 +113,10 @@ function resetCart() {
   hasAddedItemsToCart = false;
   currQuantity = 1;
   itemsInCartText.style.display = "none";
-  cartContainer.style.display = "none";
+  cartContainer.style.display = "block";
   emptyCartContainer.style.display = "block";
   fillCartContainer.style.display = "none";
+
   for (const span of currQuantitySpans) {
     span.textContent = currQuantity;
   }
