@@ -78,6 +78,7 @@
         </svg>
       </button>
       <button class="shopping-cart-btn">
+        <span class="total-items-in-cart">1</span>
         <svg
           class="shopping-cart-icon"
           xmlns="http://www.w3.org/2000/svg"
@@ -139,8 +140,13 @@
             </div>
             <div class="flex-container">
               <div class="quantity-btn-container">
-                <button class="decrement-btn">-</button>
-                <span class="quantity">1</span>
+                <button
+                  id="curr-quantity-cart-decrement-btn"
+                  class="decrement-btn"
+                >
+                  -
+                </button>
+                <span id="curr-quantity-cart-span" class="quantity">1</span>
                 <button class="increment-btn">+</button>
               </div>
               <p class="current-item-total total">$299.99</p>
@@ -293,7 +299,9 @@
         <div class="quantity-and-cart-container">
           <p class="quantity-label">Quantity</p>
           <div class="quantity-btn-container">
-            <button class="decrement-btn">-</button>
+            <button id="main-page-quantity-decrement-btn" class="decrement-btn">
+              -
+            </button>
             <span id="main-page-quantity-span" class="quantity">1</span>
             <button class="increment-btn">+</button>
           </div>

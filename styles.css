@@ -369,6 +369,13 @@ header {
   }
 }
 
+.shopping-cart-btn .total-items-in-cart {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  padding: 2px 5px;
+}
+
 .featured-images-container {
   display: flex;
   flex-direction: column;

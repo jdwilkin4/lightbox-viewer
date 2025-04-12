@@ -1,12 +1,12 @@
 // Cart functionality
-const quantitySpan = document.getElementById("main-page-quantity-span");
+const mainPageQuantitySpan = document.getElementById("main-page-quantity-span");
 
-let currQuantity = Number(quantitySpan.textContent);
+let currQuantity = Number(mainPageQuantitySpan.textContent);
 let hasAddedItemsToCart = false;
 let currTotal = 0;
 
-const currQuantitySpans = document.querySelectorAll(".quantity");
-const itemsInCartText = document.querySelector(".total-items-in-cart");
+const cartQuantitySpan = document.getElementById("curr-quantity-cart-span");
+const itemsInCartText = document.querySelectorAll(".total-items-in-cart");
 const currTotalEls = document.querySelectorAll(".total");
 
 function updateTotal() {
@@ -17,41 +17,50 @@ function getFormattedTotal() {
   return `$${currTotal.toFixed(2)}`;
 }
 
-function decrementQuantity() {
+function decrementQuantity(quantitySpan) {
   if (currQuantity === 1) return;
 
   currQuantity--;
 
-  for (const span of currQuantitySpans) {
-    span.textContent = currQuantity;
+  quantitySpan.textContent = currQuantity;
+
+  for (const cartItem of itemsInCartText) {
+    cartItem.textContent = currQuantity;
   }
 
-  itemsInCartText.textContent = currQuantity;
   updateTotal();
   currTotalEls.forEach((el) => (el.textContent = getFormattedTotal()));
 }
 
 const decrementBtns = document.querySelectorAll(".decrement-btn");
-decrementBtns.forEach((btn) =>
-  btn.addEventListener("click", decrementQuantity)
-);
+decrementBtns.forEach((btn) => {
+  const quantitySpan = btn.parentElement.querySelector(".quantity");
+  btn.addEventListener("click", () => decrementQuantity(quantitySpan));
+});
 
-function incrementQuantity() {
+function incrementQuantity(quantitySpan) {
   currQuantity++;
 
-  for (const span of currQuantitySpans) {
-    span.textContent = currQuantity;
+  quantitySpan.textContent =
+    quantitySpan.id === "main-page-quantity-span"
+      ? Number(mainPageQuantitySpan.textContent) + 1
+      : currQuantity;
+
+  for (const cartItem of itemsInCartText) {
+    if (cartContainer.style.display !== "none") {
+      cartItem.textContent = currQuantity;
+    }
   }
 
-  itemsInCartText.textContent = currQuantity;
   updateTotal();
   currTotalEls.forEach((el) => (el.textContent = getFormattedTotal()));
 }
 
 const incrementBtns = document.querySelectorAll(".increment-btn");
-incrementBtns.forEach((btn) =>
-  btn.addEventListener("click", incrementQuantity)
-);
+incrementBtns.forEach((btn) => {
+  const quantitySpan = btn.parentElement.querySelector(".quantity");
+  btn.addEventListener("click", () => incrementQuantity(quantitySpan));
+});
 
 const cartContainer = document.querySelector(".cart-container");
 const fillCartContainer = document.querySelector(".filled-cart-container");
@@ -64,8 +73,10 @@ function showCartPanel() {
   emptyCartContainer.style.display = "none";
 
   if (hasAddedItemsToCart) {
-    itemsInCartText.style.display = "inline";
-    itemsInCartText.textContent = currQuantity;
+    for (const cartItem of itemsInCartText) {
+      cartItem.style.display = "inline";
+      cartItem.textContent = currQuantity;
+    }
     fillCartContainer.style.display = "block";
   } else {
     emptyCartContainer.style.display = "block";
@@ -78,12 +89,11 @@ addToCartBtn.addEventListener("click", () => {
   if (!hasAddedItemsToCart) {
     hasAddedItemsToCart = true;
   } else {
-    currQuantity += currQuantity;
+    console.log(mainPageQuantitySpan.textContent);
+    currQuantity += Number(mainPageQuantitySpan.textContent);
   }
 
-  for (const span of currQuantitySpans) {
-    span.textContent = currQuantity;
-  }
+  cartQuantitySpan.textContent = currQuantity;
 
   updateTotal();
   currTotalEls.forEach((el) => (el.textContent = getFormattedTotal()));
@@ -96,6 +106,7 @@ shoppingCartBtn.addEventListener("click", showCartPanel);
 
 function closeCartPanel() {
   cartContainer.style.display = "none";
+  mainPageQuantitySpan.textContent = 1;
 }
 
 const closeCartBtn = document.querySelector(".cart-sidepanel .close-btn");
@@ -112,12 +123,16 @@ function resetCart() {
   currTotal = 0;
   hasAddedItemsToCart = false;
   currQuantity = 1;
-  itemsInCartText.style.display = "none";
+
+  for (const cartItem of itemsInCartText) {
+    cartItem.style.display = "none";
+  }
+
   cartContainer.style.display = "block";
   emptyCartContainer.style.display = "block";
   fillCartContainer.style.display = "none";
 
-  for (const span of currQuantitySpans) {
+  for (const span of [mainPageQuantitySpan, cartQuantitySpan]) {
     span.textContent = currQuantity;
   }
 }
