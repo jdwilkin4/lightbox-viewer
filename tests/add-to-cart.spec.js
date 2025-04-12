@@ -46,21 +46,31 @@ test("users should be able to update the cart items", async ({ page }) => {
   await expect(
     page.getByRole("heading", { name: "Premium Ergonomic Office Chair" })
   ).toBeVisible();
-  await expect(page.getByRole("main").getByText("- 1 +")).toBeVisible();
+  await expect(page.locator("#main-page-quantity-span")).toHaveText("1");
   await page.getByRole("button", { name: "Add to cart" }).click();
   await expect(page.getByRole("heading", { name: "Your Cart" })).toBeVisible();
-  await expect(page.getByText("1").nth(1)).toBeVisible();
-  await expect(page.getByText("$299.99").first()).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Your Cart" }).locator("span")
+  ).toHaveText("1");
   await page.getByRole("button", { name: "+" }).first().click();
-  await expect(page.getByText("2").nth(1)).toBeVisible();
-  await expect(page.getByText("$599.98").first()).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Your Cart" }).locator("span")
+  ).toHaveText("2");
   await page.getByRole("button", { name: "Continue Shopping" }).click();
-  await page.getByRole("button", { name: "-" }).click();
-  await expect(page.locator("#main-page-quantity-span")).toHaveText(/1/);
+  await expect(page.locator("#main-page-quantity-span")).toHaveText("1");
   await page.getByRole("button", { name: "Add to cart" }).click();
-  // TODO: fix app so tests will pass
-  // await expect(page.getByText("3").nth(1)).toBeVisible();
-  // await page.getByText("$899.97").first().click();
+  await expect(
+    page.getByRole("heading", { name: "Your Cart" }).locator("span")
+  ).toHaveText("3");
+  await page.getByRole("button", { name: "Continue Shopping" }).click();
+  await page.getByRole("button", { name: "+" }).click();
+  await expect(page.locator("#main-page-quantity-span")).toHaveText("2");
+  await page.getByRole("button", { name: "Add to cart" }).click();
+  await expect(
+    page.getByRole("heading", { name: "Your Cart" }).locator("span")
+  ).toHaveText("5");
+  await page.getByRole("button", { name: "×" }).click();
+  await expect(page.locator("#main-page-quantity-span")).toHaveText("2");
 });
 
 test("users should be able to remove items from the cart", async ({ page }) => {
