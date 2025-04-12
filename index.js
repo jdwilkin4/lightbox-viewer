@@ -1,7 +1,8 @@
 // Cart functionality
 const mainPageQuantitySpan = document.getElementById("main-page-quantity-span");
 
-let currQuantity = Number(mainPageQuantitySpan.textContent);
+let mainPageQuantity = Number(mainPageQuantitySpan.textContent);
+let cartQuantity = 0;
 let hasAddedItemsToCart = false;
 let currTotal = 0;
 
@@ -10,56 +11,48 @@ const itemsInCartText = document.querySelectorAll(".total-items-in-cart");
 const currTotalEls = document.querySelectorAll(".total");
 
 function updateTotal() {
-  currTotal = currQuantity * 299.99;
+  currTotal = cartQuantity * 299.99;
 }
 
 function getFormattedTotal() {
   return `$${currTotal.toFixed(2)}`;
 }
 
-function decrementQuantity(quantitySpan) {
-  if (currQuantity === 1) return;
+function updateQuantity(span, increment = true) {
+  if (span.id === "main-page-quantity-span") {
+    if (increment) {
+      mainPageQuantity++;
+    } else if (mainPageQuantity > 1) {
+      mainPageQuantity--;
+    }
+    span.textContent = mainPageQuantity;
+  } else if (span.id === "curr-quantity-cart-span") {
+    if (increment) {
+      cartQuantity++;
+    } else if (cartQuantity > 1) {
+      cartQuantity--;
+    }
+    span.textContent = cartQuantity;
 
-  currQuantity--;
-
-  quantitySpan.textContent = currQuantity;
-
-  for (const cartItem of itemsInCartText) {
-    cartItem.textContent = currQuantity;
+    for (const cartItem of itemsInCartText) {
+      cartItem.textContent = cartQuantity;
+    }
+    updateTotal();
+    currTotalEls.forEach((el) => (el.textContent = getFormattedTotal()));
   }
-
-  updateTotal();
-  currTotalEls.forEach((el) => (el.textContent = getFormattedTotal()));
 }
 
 const decrementBtns = document.querySelectorAll(".decrement-btn");
+const incrementBtns = document.querySelectorAll(".increment-btn");
+
 decrementBtns.forEach((btn) => {
   const quantitySpan = btn.parentElement.querySelector(".quantity");
-  btn.addEventListener("click", () => decrementQuantity(quantitySpan));
+  btn.addEventListener("click", () => updateQuantity(quantitySpan, false));
 });
 
-function incrementQuantity(quantitySpan) {
-  currQuantity++;
-
-  quantitySpan.textContent =
-    quantitySpan.id === "main-page-quantity-span"
-      ? Number(mainPageQuantitySpan.textContent) + 1
-      : currQuantity;
-
-  for (const cartItem of itemsInCartText) {
-    if (cartContainer.style.display !== "none") {
-      cartItem.textContent = currQuantity;
-    }
-  }
-
-  updateTotal();
-  currTotalEls.forEach((el) => (el.textContent = getFormattedTotal()));
-}
-
-const incrementBtns = document.querySelectorAll(".increment-btn");
 incrementBtns.forEach((btn) => {
   const quantitySpan = btn.parentElement.querySelector(".quantity");
-  btn.addEventListener("click", () => incrementQuantity(quantitySpan));
+  btn.addEventListener("click", () => updateQuantity(quantitySpan, true));
 });
 
 const cartContainer = document.querySelector(".cart-container");
@@ -70,30 +63,32 @@ const emptyCartContainer = document.querySelector(
 
 function showCartPanel() {
   cartContainer.style.display = "block";
-  emptyCartContainer.style.display = "none";
 
-  if (hasAddedItemsToCart) {
+  if (hasAddedItemsToCart && cartQuantity > 0) {
     for (const cartItem of itemsInCartText) {
       cartItem.style.display = "inline";
-      cartItem.textContent = currQuantity;
+      cartItem.textContent = cartQuantity;
     }
     fillCartContainer.style.display = "block";
+    emptyCartContainer.style.display = "none";
   } else {
     emptyCartContainer.style.display = "block";
+    fillCartContainer.style.display = "none";
   }
 }
 
 const addToCartBtn = document.querySelector(".add-to-cart-btn");
 
 addToCartBtn.addEventListener("click", () => {
-  if (!hasAddedItemsToCart) {
-    hasAddedItemsToCart = true;
-  } else {
-    console.log(mainPageQuantitySpan.textContent);
-    currQuantity += Number(mainPageQuantitySpan.textContent);
-  }
+  hasAddedItemsToCart = true;
+  cartQuantity += mainPageQuantity;
 
-  cartQuantitySpan.textContent = currQuantity;
+  cartQuantitySpan.textContent = cartQuantity;
+  mainPageQuantitySpan.textContent = mainPageQuantity;
+
+  for (const cartItem of itemsInCartText) {
+    cartItem.textContent = cartQuantity;
+  }
 
   updateTotal();
   currTotalEls.forEach((el) => (el.textContent = getFormattedTotal()));
@@ -106,7 +101,7 @@ shoppingCartBtn.addEventListener("click", showCartPanel);
 
 function closeCartPanel() {
   cartContainer.style.display = "none";
-  mainPageQuantitySpan.textContent = 1;
+  mainPageQuantitySpan.textContent = mainPageQuantity;
 }
 
 const closeCartBtn = document.querySelector(".cart-sidepanel .close-btn");
@@ -120,21 +115,23 @@ continueShoppingBtns.forEach((btn) =>
 );
 
 function resetCart() {
+  cartQuantity = 0;
+  mainPageQuantity = 1;
   currTotal = 0;
   hasAddedItemsToCart = false;
-  currQuantity = 1;
 
-  for (const cartItem of itemsInCartText) {
-    cartItem.style.display = "none";
-  }
+  mainPageQuantitySpan.textContent = mainPageQuantity;
+  cartQuantitySpan.textContent = cartQuantity;
+
+  itemsInCartText.forEach((el) => {
+    el.style.display = "none";
+    el.textContent = "0";
+  });
 
   cartContainer.style.display = "block";
   emptyCartContainer.style.display = "block";
   fillCartContainer.style.display = "none";
-
-  for (const span of [mainPageQuantitySpan, cartQuantitySpan]) {
-    span.textContent = currQuantity;
-  }
+  currTotalEls.forEach((el) => (el.textContent = "$0.00"));
 }
 
 const trashCanBtn = document.querySelector(".trash-can-btn");
