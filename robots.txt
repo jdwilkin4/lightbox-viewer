@@ -1,0 +1,5 @@
+User-agent: *
+Disallow:
+
+# OR to block certain paths
+# Disallow: /admin/
