@@ -236,10 +236,22 @@ const modal = document.querySelector(".popup-modal");
 const checkoutBtn = document.querySelector(".checkout-btn");
 const closeModalBtn = document.getElementById("close-modal-btn");
 
-checkoutBtn.addEventListener("click", () => {
-  modal.showModal();
-});
+checkoutBtn.addEventListener("click", () => modal.showModal());
 
-closeModalBtn.addEventListener("click", () => {
-  modal.close();
-});
+closeModalBtn.addEventListener("click", () => modal.close());
+
+// hamburger menu functionality
+
+const hamburgerBtn = document.querySelector(".hamburger-btn");
+const hamburgerCloseBtn = document.querySelector(".mobile-nav .close-btn");
+const hamburgerMenu = document.querySelector(".hamburger-menu");
+
+hamburgerBtn.addEventListener(
+  "click",
+  () => (hamburgerMenu.style.display = "block")
+);
+
+hamburgerCloseBtn.addEventListener(
+  "click",
+  () => (hamburgerMenu.style.display = "none")
+);
