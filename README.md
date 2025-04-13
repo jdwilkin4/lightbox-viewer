@@ -4,6 +4,10 @@ This is a project I created that was inspired by [freeCodeCamp's LightBox Viewer
 
 [Deployed Project](https://jdwilkin4.github.io/lightbox-viewer/)
 
+![Homepage](./assets/homepage.png)<br><hr>
+![LightBox](./assets/lightbox.png)<br><hr>
+![Shopping Cart](./assets/shopping-cart.png)
+
 ## Asset attribution
 
 Photos by EFFYDESK on Unsplash
@@ -14,6 +18,6 @@ Photos by EFFYDESK on Unsplash
 - CSS
 - JavaScript
 
-## Mobile
+## Tests
 
-## Tablet and Desktop
+- Playwright
