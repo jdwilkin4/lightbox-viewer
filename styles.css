@@ -38,6 +38,14 @@ main {
   }
 }
 
+/*targeting larger devices. 4k and higher*/
+
+@media (min-width: 2560px) {
+  main {
+    max-width: 70%;
+  }
+}
+
 img {
   border-radius: 10px;
   cursor: pointer;
@@ -461,7 +469,8 @@ header {
 
 @media (min-width: 1200px) {
   .thumbnail-img-container {
-    margin: auto;
+    margin: 0;
+    max-width: 500px;
   }
 }
 
@@ -622,7 +631,7 @@ small {
   display: none;
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1024px) {
   #tab-2,
   #tab-3 {
     display: inline;
@@ -649,10 +658,6 @@ button[aria-selected="true"] {
 }
 
 @media (min-width: 960px) {
-  .tabs-container {
-    width: 645px;
-  }
-
   #section-2 {
     width: 100%;
   }
